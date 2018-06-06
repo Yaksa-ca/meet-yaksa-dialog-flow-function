@@ -4,6 +4,12 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug example Umbraco Headless app",
+            "program": "${workspaceFolder}/functions/index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Proxy",
             "program": "${workspaceRoot}/functions/node_modules/bespoken-tools/bin/bst-proxy.js",
             "args": ["function", "functions/index.js","dialogflowFirebaseFulfillment"],

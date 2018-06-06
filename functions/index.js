@@ -5,6 +5,7 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
+const umbracoHelper = require('./umbracoHelper');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
  
@@ -15,9 +16,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
  
 
 function funFacts(agent){   
-      
-    agent.add('Hello Greg2');
-   
+    var helper = new umbracoHelper();
+    console.log(`helper ${helper}`);
+    const speechText = helper();
+    console.log(`speechText ${speechText}`);
+    agent.add('Hello Greg2' + speechText);   
 }
 
 
