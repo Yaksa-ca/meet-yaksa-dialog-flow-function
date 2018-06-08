@@ -17,8 +17,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
 function funFacts(agent){   
     var helper = new umbracoHelper();
-    console.log(`helper ${helper}`);
-    const speechText = helper();
+    const speechText = helper.getEmployees();
     console.log(`speechText ${speechText}`);
     agent.add('Hello Greg2' + speechText);   
 }
