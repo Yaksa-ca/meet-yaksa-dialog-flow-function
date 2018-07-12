@@ -2,23 +2,20 @@
 // for Dialogflow fulfillment library docs, samples, and to report issues
 'use strict';
  
-const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-const umbracoHelper = require('./umbracoHelper');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
  
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-  const agent = new WebhookClient({ request, response });
-  console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-  console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
- 
+exports.dialogflowFulfillment = function (req, res) {
+  console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
+  console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
+  const agent = new WebhookClient({ request: req, response: res });
+
 function funFacts(agent){   
-    var helper = new umbracoHelper();
-    const speechText = helper.getEmployees();
-    console.log(`speechText ${speechText}`);
-    agent.add('Hello Greg2' + speechText);   
+      
+    agent.add('Hello Greg2');
+   
 }
 
 
@@ -58,4 +55,4 @@ function funFacts(agent){
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
-});
+};
